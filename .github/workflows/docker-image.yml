@@ -16,6 +16,9 @@ jobs:
     - name: Build the Docker image
       run: docker build . --file Dockerfile --tag suranagivinod/fastapi:latest
     - name: Publish image
+      env:
+        DOCKER_TOKEN: ${{ secrets.DOCKER_TOKEN }}
+        DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
       run: |
         echo "$DOCKER_TOKEN" | docker login --username "$DOCKER_USERNAME" --password-stdin
         docker push suranagivinod/fastapi:latest
